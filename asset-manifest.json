@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/AnodePublicFrontendDev/static/css/main.94293e5a.css",
+    "main.js": "/AnodePublicFrontendDev/static/js/main.8661c41d.js",
+    "static/js/453.373e7dce.chunk.js": "/AnodePublicFrontendDev/static/js/453.373e7dce.chunk.js",
+    "index.html": "/AnodePublicFrontendDev/index.html",
+    "main.94293e5a.css.map": "/AnodePublicFrontendDev/static/css/main.94293e5a.css.map",
+    "main.8661c41d.js.map": "/AnodePublicFrontendDev/static/js/main.8661c41d.js.map",
+    "453.373e7dce.chunk.js.map": "/AnodePublicFrontendDev/static/js/453.373e7dce.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94293e5a.css",
+    "static/js/main.8661c41d.js"
+  ]
+}
