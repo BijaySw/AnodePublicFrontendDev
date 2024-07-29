@@ -1,0 +1,91 @@
+[
+  {
+    "Symbol": "BTC-USD",
+    "DisplaySymbol": "BTC-USD",
+    "MinPriceIncrement": "0.01",
+    "MinSizeIncrement": "0.00000001",
+    "MinimumSize": "0",
+    "MaximumSize": "1000",
+    "Venues": ["coinbase", "gemini", "kraken", "bitstamp"],
+    "BaseCurrency": "BTC",
+    "QuoteCurrency": "USD",
+    "DefaultPriceIncrement": "0.01",
+    "DefaultSizeIncrement": "0.0001",
+    "SizeBuckets": ["1", "2", "5", "10", "50"],
+    "PriceDisplaySpec": "M.m",
+    "NormalSize": "1",
+    "Timestamp": "2020-10-14T07:27:28.389686Z"
+  },
+
+	{
+	  "reqid": 1,
+	  "type": "subscribe",
+	  "streams": [
+		{
+		  "name": "OrderBook",
+		  "Symbol": "BTC-USD",
+		  "SizeBuckets": ["1", "5", "10", "15", "20"],
+		  "Venues": ["coinbase", "gemini", "kraken", "bitstamp"]
+		}
+	  ],
+	  "ts": "2019-02-13T05:17:32.000000Z"
+	},
+
+	{
+	  "reqid": 2,
+	  "type": "subscribe",
+	  "streams": [
+		{
+		  "name": "OrderBook",
+		  "Symbol": "BTC-USD",
+		  "Depth": 5,
+		  "DepthType": "Price",
+		  "Venues": ["coinbase", "gemini", "kraken", "bitstamp"]
+		}
+	  ],
+	  "ts": "2019-02-13T05:17:32.000000Z"
+	},
+
+	{
+	  "reqid": 3,
+	  "type": "subscribe",
+	  "streams": [
+		{
+		  "name": "OrderBook",
+		  "Symbol": "BTC-USD",
+		  "SizeBuckets": ["1"],
+		  "Venues": ["coinbase", "gemini", "kraken", "bitstamp"]
+		}
+	  ],
+	  "ts": "2019-02-13T05:17:32.000000Z"
+	},
+
+
+	{
+	  "reqid": 3,
+	  "type": "amend",
+	  "streams": [
+		{
+		  "name": "OrderBook",
+		  "Symbol": "BTC-USD",
+		  "SizeBuckets": ["5"],
+		  "Venues": ["coinbase", "gemini", "kraken", "bitstamp"]
+		}
+	  ],
+	  "ts": "2019-02-13T05:17:32.000000Z"
+	},
+
+	{
+	  "reqid": 1,
+	  "type": "amend",
+	  "streams": [
+		{
+		  "name": "OrderBook",
+		  "Symbol": "BTC-USD",
+		  "SizeBuckets": ["0.1", "0.2", "0.3", "0.5", "0.4"],
+		  "Venues": ["coinbase", "gemini", "kraken", "bitstamp"]
+		}
+	  ],
+	  "ts": "2019-02-13T05:17:32.000000Z"
+	}
+]
