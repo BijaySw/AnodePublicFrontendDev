@@ -94,25 +94,6 @@ export default function AggBook({handleBlur, onChangeBidQuantity, AggBookData}) 
 
       return fFourDecimalPlaces(SpreadValue);
     };
-    
-
-    //     let params = {
-    //     "reqid": 1234567890,
-    //     "type": "subscribe",
-    //     "ts": "2023-02-20T14:30:00.000Z",
-    //     "streams": [
-    //         {
-    //             "name": "OrderBook",
-    //             "Symbol": "BTC-USD",
-    //             "Venues": [
-    //                 "binance",
-    //                 "kraken"
-    //             ],
-    //             "SizeBuckets": {sizeBucketValue}
-    
-    //         }
-    //     ]
-    // };
 
     useEffect(() => {
        
@@ -120,9 +101,6 @@ export default function AggBook({handleBlur, onChangeBidQuantity, AggBookData}) 
         //console.log(AggData);
         if(AggData && bidsKey in AggData)
          {          
-             //console.log("Bids exists");
-             //console.log(AggData.Bids[0].price);
-             //console.log(AggData.Bids[0].quantity);
              if(!editValue)
              {
               sleep(2000);
@@ -134,18 +112,6 @@ export default function AggBook({handleBlur, onChangeBidQuantity, AggBookData}) 
          }
         
        },  [AggBookData]);
-    //   useEffect(() => {
-       
-    //    SetAggData(AggBookData.AggBookData);
-    //    console.log(aggData);
-    //    if(aggData && bidsKey in aggData)
-    //     {          
-    //         console.log("Bids exists");
-    //         console.log(aggData.Bids);
-    //         SetBidData(AggBook.Bids);
-    //     }
-       
-    //   },  [AggBookData]);
 
   return (
       <div>
@@ -198,80 +164,12 @@ export default function AggBook({handleBlur, onChangeBidQuantity, AggBookData}) 
             <Grid item xs={4}>
                 {askData.map((ask, index) => (
                      <div style={{color:'white', marginLeft:'5px', padding:'0', fontSize:'10px'}}>
-                     <label style={{width:'40px'}} for="price" class="form-label">{fTwoDecimalPlaces(ask.price)}</label> <input key={ask.id || index} class="inputNumberSize" type="number" style={{marginLeft:'8px'}} value={fTwoDecimalPlaces(ask.quantity)}/>
+                     <label style={{width:'40px'}} for="price" class="form-label">{fTwoDecimalPlaces(ask.price)}</label> <input key={index} class="inputNumberSize" type="number" onBlur={clickOutside} onChange={(event) => onChangeBidQuantityAgg(index, event)} style={{marginLeft:'8px'}} value={fTwoDecimalPlaces(ask.quantity)}/>
                      </div>
                 ))}
            
             </Grid>
         </Grid>
-        {/* <Grid container>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <input class="inputNumberSize" type="number"/> <label for="price" class="form-label" style={{marginLeft:'5px'}}>70009.51</label>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white'}}>
-            <div style={{width:'80px', height:'20px', backgroundColor:'rgb(33, 32, 32)', marginLeft:'7px'}}> <p style={{textAlign:'center'}}>1.5</p></div>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <label for="price" class="form-label" style={{margin:'0'}}>70009.51</label> <input class="inputNumberSize" type="number" style={{marginLeft:'5px'}}/>
-            </div>
-            </Grid>
-        </Grid>
-        <Grid container>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <input class="inputNumberSize" type="number"/> <label for="price" class="form-label" style={{marginLeft:'5px'}}>70009.51</label>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white'}}>
-            <div style={{width:'80px', height:'20px', backgroundColor:'rgb(33, 32, 32)', marginLeft:'7px'}}> <p style={{textAlign:'center'}}>1.5</p></div>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <label for="price" class="form-label" style={{margin:'0'}}>70009.51</label> <input class="inputNumberSize" type="number" style={{marginLeft:'5px'}}/>
-            </div>
-            </Grid>
-        </Grid>
-        <Grid container>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <input class="inputNumberSize" type="number"/> <label for="price" class="form-label" style={{marginLeft:'5px'}}>70009.51</label>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white'}}>
-            <div style={{width:'80px', height:'20px', backgroundColor:'rgb(33, 32, 32)', marginLeft:'7px'}}> <p style={{textAlign:'center'}}>1.5</p></div>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <label for="price" class="form-label" style={{margin:'0'}}>70009.51</label> <input class="inputNumberSize" type="number" style={{marginLeft:'5px'}}/>
-            </div>
-            </Grid>
-        </Grid>
-        <Grid container>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <input class="inputNumberSize" type="number"/> <label for="price" class="form-label" style={{marginLeft:'5px'}}>70009.51</label>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white'}}>
-            <div style={{width:'80px', height:'20px', backgroundColor:'rgb(33, 32, 32)', marginLeft:'7px'}}> <p style={{textAlign:'center'}}>1.5</p></div>
-            </div>
-            </Grid>
-            <Grid item xs={4}>
-            <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
-            <label for="price" class="form-label" style={{margin:'0'}}>70009.51</label> <input class="inputNumberSize" type="number" style={{marginLeft:'5px'}}/>
-            </div>
-            </Grid>
-        </Grid> */}
         {isSideBar &&(<PersistentDrawerRight prop={true}/>)}
       </div>
   );

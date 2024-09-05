@@ -82,6 +82,25 @@ export default function CustomCard({card, onDelete, SecuritiesData }) {
         }
     ]
 };
+
+
+  let L2BookParams = {
+    "reqid": 1234567890,
+    "type": "subscribe",
+    "ts": "2023-02-20T14:30:00.000Z",
+    "streams": [
+        {
+            "name": "OrderBook",
+            "Symbol": "BTC-USD",
+            "Venues": [
+                "binance",
+                "kraken"
+            ],
+            "Depth": 5
+
+        }
+    ]
+  };
     const [crypto, setCrypto] = React.useState('');
     const handleChange = (event) => {
         setCrypto(event.target.value);
@@ -92,6 +111,7 @@ export default function CustomCard({card, onDelete, SecuritiesData }) {
     //const [items, setItems] = useState([]);
     const [{items}, setItems] = useState({ items: [] });
     const [wsCard, setCardWs] = useState(1);
+    const [wsL2BookCard, setL2BookCardWs] = useState(1);
     const [marketCardData, setCardMD] = useState([]);
     const [cardsResp, setCardsData] = useState([]);
     const [addCardButtonName, setAddCardButtonName] = React.useState('Add Card');
@@ -99,6 +119,7 @@ export default function CustomCard({card, onDelete, SecuritiesData }) {
     const [newSizeBucket, setNewSizeBucket] = useState([1, 5, 10, 50, 100]);
     //const [secureData, setSecureData] = useState(SecuritiesData);
     const [securitesData, setSecuritiesData] = useState([]);
+    const [l2Data, setL2Data] = useState([]);
 
     const wsRef = useRef(null);
     const symbolKey = 'symbol';
@@ -214,20 +235,12 @@ export default function CustomCard({card, onDelete, SecuritiesData }) {
       setTime(showTime);
     },  [cardsResp, wsCard]);
 
-    // const sendParamToServer = (paramData) => {
-    //   if (wsCard && wsCard.readyState === WebSocket.OPEN) {
-    //     const message = JSON.stringify({ type: 'updateParam', paramData });
-    //     wsCard.send(message);
-    //   }
-    // };
-  
-    // const[isAggBook1, SetAggBook1 ]= useState(book.toString() === 'AggBook');
-    // const[isL2Book1, SetL2Book1 ]= useState(book.toString() === 'L2Book');
-    // const[isExchange1, SetExchange1]= useState(book.toString() === 'Exchanges');
-  
-    // const[isAggBook2, SetAggBook2 ]= useState(book.toString() === 'AggBook');
-    // const[isL2Book2, SetL2Book2 ]= useState(book.toString() === 'L2Book');
-    // const[isExchange2, SetExchange2]= useState(book.toString() === 'Exchanges');
+    useEffect(() => {
+      const websocket = connectWebSocket(url, L2BookParams, setL2Data, wsL2BookCard);
+      setL2BookCardWs(websocket)
+      console.log(l2Data);
+      
+     },  [l2Data, wsL2BookCard]);
 
     return (
       <div class="card cardSize" style={{fontSize: 11, background:"black",margin:'1px', padding:'1px'}}>
@@ -248,13 +261,15 @@ export default function CustomCard({card, onDelete, SecuritiesData }) {
                 </label>
               </div>
             </Grid>
-            <Grid item xs={6} style={{height:'20px', fontSize:'10px'}}>
-              <div style={{height: 20}}>
+            <Grid item xs={6} style={{height:20, fontSize:'10px'}}>
+              <div style={{height: 30, width:130}}>
               <Autocomplete
                 disablePortal
-                options={securitesData.map(item => item.Symbol)}
-                sx={{m: 1, minWidth: 140, height: 20, display: 'flex',fontSize:'10px', justifyContent: 'center',background:'white' }}
-                renderInput={(params) => <TextField sx={{m: 1, minWidth: 140, height: 20, display: 'flex',fontSize:'10px', justifyContent: 'center',background:'white' }} {...params}/>}
+                options={securitesData.map(item => `${item.QuoteCurrency}-${item.BaseCurrency}`)}
+                sx={{'& .MuiOutlinedInput-root': {
+              padding:0, paddingBottom:5, height:30, paddingRight:1 // Example: set height to 60px
+            },marginTop:1, marginBottom:0, height:25, display: 'flex', fontSize:5, justifyContent: 'center',background:'white' }}
+                renderInput={(params) => <TextField sx={{ minWidth: 130, padding: 0, minHeight:25, fontSize:5 , justifyContent: 'center',background:'white' }} {...params}/>}
               />
                 {/* <FormControl sx={{ m: 1, minWidth: 120, height: 20, display: 'flex', justifyContent: 'center',background:'white'}} >
                   <Select
@@ -304,7 +319,7 @@ export default function CustomCard({card, onDelete, SecuritiesData }) {
               <div class="square"> <p class="text">70000.05</p></div>
             </div>
             {isAggBook && cardsResp.data &&(<AggBook handleBlur = {onHandleBlur} onChangeBidQuantity = {OnchangeQuantity} AggBookData = {customData}/>)}
-            {isL2Book && cardsResp.data && (<L2Book L2BookData = {cardsResp.data}/>)}
+            {isL2Book && cardsResp.data && (<L2Book L2BookData = {l2Data.data}/>)}
             {isExchange &&(<Exchanges onDeleteEvent={onDelete} onClickAdd = {onAddCard} AddButtonName = {addCardButtonName}/>)}
         </div>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
