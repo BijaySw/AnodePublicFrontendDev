@@ -54,9 +54,9 @@ const Item = styled(Paper)(({ theme }) => ({
 // });
 
 
-export default function CustomCard({card, onDelete, SecuritiesData }) {
+export default function CustomCard({card, onDelete }) {
 
-  let url = 'ws://localhost:8080/stream';
+  let url = 'ws://ec2-3-24-123-198.ap-southeast-2.compute.amazonaws.com/stream';
   const [sizeBucketValue, setSizeBucketValue] = useState([1, 5, 10, 50, 100]);
   const [stype, setStype] = useState("subscribe");
   const [getTime, setTime] = useState(" ");
@@ -195,7 +195,7 @@ export default function CustomCard({card, onDelete, SecuritiesData }) {
     //   }
     // };
     useEffect(() => {
-      axios.get('http://localhost:8080/v1/securities', {
+      axios.get('http://ec2-3-24-123-198.ap-southeast-2.compute.amazonaws.com/v1/securities', {
         headers: {
           
         }

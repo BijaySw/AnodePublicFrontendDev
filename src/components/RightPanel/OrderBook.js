@@ -59,15 +59,7 @@ export default function TopRightPanel() {
 
   let url = 'ws://localhost:8080/stream';
 
-  
-
-  // const [{items}, setItems] = useState({ items: [] });
-  // const [wsCard, setCardWs] = useState(1);
-  // const [marketCardData, setCardMD] = useState([]);
-  // const [cardResp, setCardData] = useState([]);
   const [cards, setCards] = useState([]);
-  //const [newCardName, setNewCardName] = useState('');
-  const [securitesData, setSecuritiesData] = useState([]);
 
   const addItem = () => {
       const newCard = {
@@ -81,16 +73,6 @@ export default function TopRightPanel() {
     setCards(cards.filter(card => card.id !== id));
   };
 
-   useEffect(() => {
-    axios.get('http://localhost:8080/v1/securities', {
-      headers: {
-        
-      }
-    })
-    .then(response => setSecuritiesData(response.data))
-    .catch(error => console.error('Error:', error));
-  },  []);
-
 
   return (
     <div>
@@ -99,7 +81,7 @@ export default function TopRightPanel() {
       <div style={{display: 'flex', flexDirection: 'row', flexWrap:'wrap'}}>
       {/* {items} */}
       {cards.map(card => (
-          <CustomCard key={card.id} card={card} onDelete={() => handleDeleteCard(card.id)} SecuritiesData = {securitesData}/>
+          <CustomCard key={card.id} card={card} onDelete={() => handleDeleteCard(card.id)}/>
         ))}
       </div>
     </div>
