@@ -11,7 +11,7 @@ import $ from 'jquery';
 import Popper from 'popper.js'; 
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import useWebSocket from 'react-use-websocket';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useId } from 'react';
 import { connectWebSocket } from '../../websocket';
 import { connectWebSocketDynamic } from '../../websocketDynamic';
 import PropTypes from 'prop-types';
@@ -61,12 +61,17 @@ export default function CustomCard({card, onDelete }) {
   const [stype, setStype] = useState("subscribe");
   const [getTime, setTime] = useState(" ");
 
+  const generateUniqueId = () => {
+    // Create a unique ID based on timestamp and a random number
+    return parseFloat(`${Date.now()}${Math.floor(Math.random() * 1000)}`);
+  };
+
   const date = new Date();
     const showTime = date.getHours() 
         + ':' + date.getMinutes() 
         + ":" + date.getSeconds();
   let params = {
-    "reqid": 12345678,
+    "reqid": generateUniqueId(),
     "type": stype,
     "ts": getTime,
     "streams": [
@@ -85,7 +90,7 @@ export default function CustomCard({card, onDelete }) {
 
 
   let L2BookParams = {
-    "reqid": 1234567890,
+    "reqid": generateUniqueId()+5,
     "type": "subscribe",
     "ts": "2023-02-20T14:30:00.000Z",
     "streams": [
@@ -165,6 +170,7 @@ export default function CustomCard({card, onDelete }) {
       SetL2Book(false);
       SetExchange(false);
       setAddCardButtonName("update Card")
+      console.log(generateUniqueId());
     }
 
     // const fetchBidsDataFromServer = async () => {
@@ -238,7 +244,7 @@ export default function CustomCard({card, onDelete }) {
     useEffect(() => {
       const websocket = connectWebSocket(url, L2BookParams, setL2Data, wsL2BookCard);
       setL2BookCardWs(websocket)
-      console.log(l2Data);
+      //console.log(l2Data);
       
      },  [l2Data, wsL2BookCard]);
 

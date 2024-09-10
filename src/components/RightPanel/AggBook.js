@@ -79,6 +79,11 @@ export default function AggBook({handleBlur, onChangeBidQuantity, AggBookData}) 
     return isNaN(numbervalue)? '--' : numbervalue.toFixed(2);
     };
 
+    function fOneDecimalPlaces(value) {
+      const numbervalue = parseFloat(value)
+      return isNaN(numbervalue)? '--' : numbervalue.toFixed(1);
+      };
+
     function fFourDecimalPlaces(value) {
       const numbervalue = parseFloat(value)
       return isNaN(numbervalue)? '--' : numbervalue.toFixed(4);
@@ -147,7 +152,7 @@ export default function AggBook({handleBlur, onChangeBidQuantity, AggBookData}) 
             <Grid item xs={4}>
             {bidsData.map((bid, index) => (
               <div style={{color:'white', marginLeft:'5px', padding:'0', fontSize:'10px'}}>
-                <input key={index} class="inputNumberSize" type="number" onBlur={clickOutside} onChange={(event) => onChangeBidQuantityAgg(index, event)} value={fTwoDecimalPlaces(bid.quantity)}/> <label for="price" class="form-label" style={{marginLeft:'5px', width:'40px'}}>{fTwoDecimalPlaces(bid.price)}</label>
+                <input key={index} class="inputNumberSize" type="number" onBlur={clickOutside} onChange={(event) => onChangeBidQuantityAgg(index, event)} value={fTwoDecimalPlaces(bid.quantity)}/> <label for="price" class="form-label" style={{marginLeft:'5px', width:'40px'}}>{fOneDecimalPlaces(bid.price)}</label>
               </div>
             ))}
             {/* <div style={{color:'white', marginLeft:'5px', padding:'0'}}>
@@ -164,7 +169,7 @@ export default function AggBook({handleBlur, onChangeBidQuantity, AggBookData}) 
             <Grid item xs={4}>
                 {askData.map((ask, index) => (
                      <div style={{color:'white', marginLeft:'5px', padding:'0', fontSize:'10px'}}>
-                     <label style={{width:'40px'}} for="price" class="form-label">{fTwoDecimalPlaces(ask.price)}</label> <input key={index} class="inputNumberSize" type="number" onBlur={clickOutside} onChange={(event) => onChangeBidQuantityAgg(index, event)} style={{marginLeft:'8px'}} value={fTwoDecimalPlaces(ask.quantity)}/>
+                     <label style={{width:'40px'}} for="price" class="form-label">{fOneDecimalPlaces(ask.price)}</label> <input key={index} class="inputNumberSize" type="number" onBlur={clickOutside} onChange={(event) => onChangeBidQuantityAgg(index, event)} style={{marginLeft:'8px'}} value={fTwoDecimalPlaces(ask.quantity)}/>
                      </div>
                 ))}
            
